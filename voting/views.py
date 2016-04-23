@@ -1,13 +1,32 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db import transaction
 
-from voting.models import Poll, Record, Vote
+from voting.models import Poll, Record, Vote, Option
 
 ## Views – funkce, které vracejí webové odpovědi.
 ## Každá z těchto funkcí obsluhuje nějakou adresu (viz urls.py),
 ## bere jako argument "požadavek" od prohlížeče, a vrací odpověď – v našem
 ## případě webovou stránku vyrobenou ze šablony.
 
+def info(request):
+    """Informace o projektu"""
+    ## Tahle funkce předá funkci "render", která zpracuje šablonu
+    ## "(templates)/info_o_projektu.html"
+    return render(request, 'info_o_projektu.html')
+
+def moznost(request, pk):
+    """Pridani nove moznosti"""
+    ## Tahle funkce předá funkci "render", která zpracuje šablonu
+    ## "(templates)/pridani_moznosti.html"
+    if request.method == 'POST':
+        poll = get_object_or_404(Poll, pk=pk)
+        title = request.POST.get('title')
+        print(request.POST)
+        print(title)
+        option = Option(poll=poll, title=title)
+        option.save()
+        return redirect('poll_detail', pk=pk)
+    return render(request, 'pridani_moznosti.html')
 
 def poll_list(request):
     """Seznam všech hlasování"""
@@ -33,7 +52,7 @@ def poll_detail(request, pk):
     error = ''
     ## A teď: Pokud chtěl uživatel změnit stav (POST), musíme mu zkusit
     ## vyhovět.
-    if request.method == 'POST':
+    if request.method == 'POST' and 'Vote' in request.POST:
         ## S požadavkem POST by měly přijít informace z formuláře, které nám
         ## Django zpřístupní ve slovníku "request.POST".
         ## Očekáváme něco jako:
@@ -84,12 +103,32 @@ def poll_detail(request, pk):
             ## Formulář teď uživateli ukážeme znova, s chybovou hláškou,
             ## ale o údaje které vyplnil nepřijde – máme je v "option_values"
             ## a použijeme je při vytvéření stránky.
-    else:
-        ## Poslal-li uživatel požadavek GET, nastavíme si "option_values"
-        ## na dvojice jako výše, jen budou všechny hlasy zatím prázdné.
-        option_values = []
-        for option in poll.options.all():
-            option_values.append((option, False))
+    elif request.method == 'POST' and 'Vote' not in request.POST:
+        for key in request.POST:
+            if key.startswith('Delete-'):
+                list_key = list(key)
+                list_key[0:7] = ''
+                key = ''.join(list_key)
+                record = get_object_or_404(Record, pk=key)
+                record.delete()
+            if key.startswith('Rename-'):
+                list_key = list(key)
+                list_key[0:7] = ''
+                key = ''.join(list_key)
+                record = get_object_or_404(Record, pk=key)
+                record.title = request.POST['rename_title']
+                if len(request.POST['rename_title']) == 0:
+                    error = 'Zadej jméno!'
+                else:
+                    record.save()
+        if not error:
+            return redirect('poll_detail', pk=pk)
+
+    ## Poslal-li uživatel požadavek GET, nastavíme si "option_values"
+    ## na dvojice jako výše, jen budou všechny hlasy zatím prázdné.
+    option_values = []
+    for option in poll.options.all():
+        option_values.append((option, False))
 
     ## Teď můžeme tvořit výslednou stránku. Napřed si pěkně připravíme
     ## informace pro šablonu...

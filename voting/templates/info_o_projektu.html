@@ -1,0 +1,14 @@
+{% extends "voting/_layout.html" %}
+{% block content %}
+<div class="container">
+Ahoj, tady je moje první webová stránka. Budeme hlasovat za různé možnosti, vytvařet vlastní hlasování.
+Tady je další roztomilá žirafa:
+<img src="https://de1000colores.files.wordpress.com/2010/07/giraffe.jpg" width="558" align="right">
+
+<p>
+  Konfigurační soubor se vygeneruje plně okomentovaný, takže i úplnému začátečníkovi v práci s touto knihovnou bude jasný význam jednotlivých konfiguračních klíčů. V tuto chvíli už je dostupný příkaz pro spuštění testovacího serveru, takže lze vyzkoušet python manage.py runserver a po přistoupení na URL http://localhost:8000, už je vidět úvodní stránka. Začít vytvářet aplikaci je možné jen v případě, že již máme založený nějaký projekt. Aplikace v Djangu jsou vždy součástí projektu, jedna aplikace může být součástí i více projektů. Je ovšem důležité, aby interpret Pythonu našel zaregistrovaný modul aplikace.
+  Mezi přijetím požadavku a odesláním odpovědi z konkrétního view projde požadavek přes řetěz tzv. middleware. V této knihovně je však chápání pojmu middleware odlišné od běžného pojetí. Zde jsou třídy middleware chápány obdobně jako filter v Java Servlet API. Naprosto zřejmě se jedná o aplikaci návrhového vzoru Chain of Responsibility. Úlohou tohoto návrhového vzoru je vyhnutí vázání odesílatele a příjemce zprávy za použití řetězu objektů, které mohou odpovědět. Django používá k zachycování požadavků tzv. view funkce. Tato funkce je namapována na konkrétní url. Standardním způsobem je právě definování view jako samostatných funkcí, ale díky flexibilitě jazyka Python lze použít view namapovaná i z existující instance objektu.
+</p>
+
+</div>
+{% endblock content %}

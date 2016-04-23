@@ -1,0 +1,22 @@
+{% extends "voting/_layout.html" %}
+
+{% block title %}
+    {{ poll.title }} – {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+<form method="POST" action="">
+<div class="container">
+  <p>
+      Nová možnost:
+  </p>
+  <p>
+      <input type="text" name="title">
+  </p>
+  <p>
+      <input type="submit" value="Přidat novou možnost" name="nova_moznost">
+  </p>
+</div>
+{% csrf_token %}
+</form>
+{% endblock content %}

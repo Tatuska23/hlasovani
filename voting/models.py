@@ -15,7 +15,7 @@
 ## Samotná webová aplikace strukturu databáze měnit nemůže (resp. neměla by :).
 ## Takže když by to vypadalo, že potřebuješ třeba takovouhle tabulku
 ## pro hlasování o termínu:
-##
+##    Tabulka Hlasovani (Poll)
 ## Jméno | 9. 4. | 16. 4. | 23. 4. |
 ## ---------------------------------
 ## Janča |  jo   |   ne   |   jo   |
@@ -25,7 +25,7 @@
 ## budou v průběhu hlasování sloupce přidávat a ubírat, tak je potřeba
 ## přidat další tabulku:
 ##
-## Záznamy          Možnosti            Hlasy
+## Záznamy (Record) Možnosti (Option)    Hlasy (Vote)
 ## ----------       --------            ------
 ##
 ## č. | Jméno       č. | Datum          č. člověka | č. možnosti | hodnota

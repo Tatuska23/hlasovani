@@ -31,6 +31,15 @@
                     {% for option in poll.options.all %}
                         <th>{{ option.title }}</th>
                     {% endfor %}
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
                 </tr>
                 {## Pak jeden tabulkový řádek pro každý záznam ##}
                 {## (Django automaticky zavolá funkce jako records.all a vote_values) ##}
@@ -47,6 +56,15 @@
                                 <td class="no">NE</td>
                             {% endif %}
                         {% endfor %}
+                        <td>
+                          <input type="submit" value="Smazat" name="Delete-{{record.pk}}">
+                        </td>
+                        <td>
+                          <input type="submit" value="Přejmenovat" name="Rename-{{record.pk}}">
+                        </td>
+                        <td>
+                            <input type="text" name="rename_title">
+                        </td>
                     </tr>
                 {% endfor %}
                 {## A nakonec tabulkový řádek s formulářem ##}
@@ -63,14 +81,26 @@
                                    {% if value %}checked="checked"{% endif %}>
                         </td>
                     {% endfor %}
-                </tr>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+
+                    </td>
+                  </tr>
             </table>
             {## Máme-li zobrazit chybovou hlášku, udělejme to tady: ##}
             {% if error %}
                 <p>{{ error }}</p>
             {% endif %}
             {## Tlačítko na odeslání: ##}
-            <input type="submit" value="Hlasuj!">
+            <input type="submit" value="Hlasuj!" name="Vote">
+            <p>
+                <a href="{% url 'pridani_moznosti' pk=poll.pk %}">Přidat možnost</a>
+            </p>
             {## A ještě speciální skrytá hodnota, která pomáhá proti ##}
             {## zlým lidem, kteří by chtěli formulář odeslat bez našeho ##}
             {## vědomí. ##}

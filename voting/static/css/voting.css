@@ -34,10 +34,10 @@ table.poll td.yes {
     /* ## ... budou mít zelené pozadí.
      * ## Barvičky se dají vybírat třeba na http://www.colorpicker.com/
      */
-    background-color: #5cb85c;
+    background-color: #C2FFC9;
 }
 
 /* ## Podobně pro "no" -- červené pozadí */
 table.poll td.no {
-    background-color: #d9534f;
+    background-color: #FCCFCF;
 }

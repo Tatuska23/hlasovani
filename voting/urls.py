@@ -14,4 +14,6 @@ urlpatterns = [
     ## Tahle funkce bere argument "pk" (proto ono "(?P<pk>" v regulárním
     ## výrazu), a vrátí stránku pro odpovídající hlasování.
     url(r'^polls/(?P<pk>\d+)$', views.poll_detail, name='poll_detail'),
+    url(r'^info/', views.info, name='info_o_projektu'),
+    url(r'^polls/(?P<pk>\d+)/nova_moznost/', views.moznost, name='pridani_moznosti'),
 ]

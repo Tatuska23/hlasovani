@@ -3,6 +3,7 @@
 
 {## Z oné _layout.html vezmeme základní strukturu: ##}
 {% extends "voting/_layout.html" %}
+{% load staticfiles %}
 
 {## Předefinujeme hlavičku s odkazem na hlavní stránku. ##}
 {## Tohle je hlavní stránka, takže odkaz není potřeba. ##}
@@ -27,5 +28,23 @@
                 </li>
             {% endfor %}
         </ul>
+        <p>
+            Krátký návod k použití:
+        </p>
+        <ol>
+                <li>
+                    Jdi na hlasování ze seznamu výš
+                </li>
+                <li>
+                    Napiš své jméno
+                </li>
+                <li>
+                    Vyber si možnost
+                </li>
+        </ol>
+        <p>
+            <a href="{% url 'info_o_projektu' %}">Info o projektu</a>
+        </p>
+        <img src="{% static 'images/giraffe1.jpg' %}" width="589" alt="Neni zobrazeni obrazku" align="right">
     </div>
 {% endblock content %}
